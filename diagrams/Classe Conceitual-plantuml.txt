@@ -1,0 +1,54 @@
+@startuml
+!theme plain
+hide circle
+skinparam classAttributeIconSize 0
+
+' Definição das Classes e Atributos
+class Gerente {
+  id
+  nome
+  telefone
+  email
+}
+
+class Motorista {
+  id
+  nome
+  telefone
+  documento
+  veiculo
+  rendimentoKmLitro
+}
+
+class Roteiro {
+  id
+  data
+  distanciaTotal
+  tempoTotalParado
+  custoEstimado
+}
+
+class Ponto {
+  id
+  endereco
+  latitude
+  longitude
+  ordemNoRoteiro
+  dataHoraChegada
+  dataHoraSaida
+  tempoParadoCalculado
+}
+
+class Parametro {
+  valorCombustivel
+  custoPorKm
+  jornadaPadraoHoras
+  regrasDeCalculo
+}
+
+' Relacionamentos e Multiplicidades
+Gerente "1" -- "0..*" Motorista
+Motorista "1" -- "0..*" Roteiro
+Roteiro "1" -- "2..*" Ponto
+
+@enduml

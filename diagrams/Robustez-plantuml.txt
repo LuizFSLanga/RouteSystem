@@ -1,0 +1,59 @@
+@startuml
+!theme plain
+allowmixing
+
+' Atores
+actor "Gerente" as Gerente
+actor "Motorista" as Motorista
+
+' Fronteiras (Interfaces)
+boundary "Tela de\nGestão" as TelaGestao
+boundary "Painel\nDashboard" as TelaDashboard
+boundary "Tela do\nEntregador" as TelaApp
+
+' Controlos (Lógica/Processamento)
+control "Gestor de\nCadastros" as CtrlCadastro
+control "Montador de\nRoteiros" as CtrlRoteiro
+control "Processar\nParadas" as CtrlParada
+control "Calculador de\nTempo e Custos" as CtrlCalculo
+control "Gerador de\nIndicadores" as CtrlDashboard
+
+' Entidades (Base de Dados)
+entity "Motorista" as EntMotorista
+entity "Gerente" as EntGerente
+entity "Ponto" as EntPonto
+entity "Roteiro" as EntRoteiro
+entity "Parâmetro" as EntParam
+
+' Fluxo do Gerente
+Gerente -down-> TelaGestao
+Gerente -down-> TelaDashboard
+
+TelaGestao -down-> CtrlCadastro
+TelaGestao -down-> CtrlRoteiro
+
+CtrlCadastro -down-> EntMotorista
+CtrlCadastro -down-> EntPonto
+CtrlCadastro -down-> EntParam
+CtrlCadastro -down-> EntGerente
+
+CtrlRoteiro -down-> EntRoteiro
+CtrlRoteiro -right-> EntPonto
+CtrlRoteiro -right-> EntMotorista
+
+' Fluxo do Motorista
+Motorista -down-> TelaApp
+
+TelaApp -down-> CtrlParada
+CtrlParada -down-> CtrlCalculo
+CtrlParada -down-> EntPonto
+
+CtrlCalculo -down-> EntRoteiro
+CtrlCalculo -down-> EntParam
+
+' Fluxo do Dashboard
+TelaDashboard -down-> CtrlDashboard
+CtrlDashboard -down-> EntRoteiro
+CtrlDashboard -down-> EntPonto
+
+@enduml
