@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RotaTempo — Gestão de Paradas</title>
+  <title>Gerente</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
       <div class="brand">
         <div class="brand-mark">RT</div>
         <div>
-          <strong>RotaTempo</strong>
+          <strong>RotaTempo (provisório)</strong>
           <small>Gestão de rotas</small>
         </div>
       </div>
@@ -29,8 +29,8 @@
       <div class="sidebar-footer">
         <div class="user-avatar">LC</div>
         <div>
-          <strong>Lucas Coordenador</strong>
-          <small>Administrador</small>
+          <strong class="user-name"></strong>
+          <!--<small>Administrador</small>-->
         </div>
       </div>
     </aside>
@@ -43,8 +43,8 @@
           <h1 id="pageTitle">Visão geral</h1>
         </div>
         <div class="top-actions">
-          <div class="date-chip">21/09/2026</div>
-          <button class="icon-btn" title="Notificações">♢</button>
+          <!--<div class="date-chip">21/09/2026</div>
+          <button class="icon-btn" title="Notificações">♢</button>-->
         </div>
       </header>
 
@@ -52,28 +52,28 @@
         <div class="page-intro">
           <div>
             <p class="eyebrow">ACOMPANHAMENTO OPERACIONAL</p>
-            <h2>Olá, Lucas 👋</h2>
+            <h2 class="user-name"></h2>
             <p class="muted">Veja quanto tempo sua operação está parando e onde estão os principais gargalos.</p>
           </div>
-          <button class="primary" data-modal="modalRegistro">+ Registrar parada</button>
+          <button class="primary" data-modal="modalRegistro">Registrar parada</button>
         </div>
 
         <div class="kpi-grid">
           <article class="kpi-card">
-            <div class="kpi-icon blue">◷</div>
+            <!--<div class="kpi-icon blue">◷</div>-->
             <div><span>Tempo parado hoje</span><strong>4h 18min</strong><small class="positive">↓ 12% vs. ontem</small></div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-icon orange">●</div>
+            <!--<div class="kpi-icon orange">●</div>-->
             <div><span>Paradas registradas</span><strong>27</strong><small>8 motoristas</small></div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-icon green">⌁</div>
+            <!--<div class="kpi-icon green">⌁</div>-->
             <div><span>Distância percorrida</span><strong>486 km</strong><small>32 rotas concluídas</small></div>
           </article>
           <article class="kpi-card">
-            <div class="kpi-icon purple">R$</div>
-            <div><span>Custo estimado</span><strong>R$ 742,80</strong><small>R$ 1,53 / km</small></div>
+            <!--<div class="kpi-icon purple">R$</div>-->
+            <div><span>Custo estimado</span><strong class="custoEstimado">R$ 742,80</strong><small>R$ 1,53 / km</small></div>
           </article>
         </div>
 
@@ -81,7 +81,11 @@
           <article class="card chart-card">
             <div class="card-head">
               <div><h3>Tempo parado</h3><p>Últimos 7 dias</p></div>
-              <select id="chartPeriod"><option>7 dias</option><option>30 dias</option><option>Este mês</option></select>
+              <select id="chartPeriod">
+                <option>7 dias</option>
+                <option>30 dias</option>
+                <option>Este mês</option>
+              </select>
             </div>
             <div class="bar-chart" id="barChart"></div>
             <div class="chart-legend"><span><i></i> Tempo parado (horas)</span></div>
@@ -90,10 +94,10 @@
           <article class="card">
             <div class="card-head"><div><h3>Principais gargalos</h3><p>Locais com maior tempo parado</p></div><button class="link-btn" data-page-link="pontos">Ver todos</button></div>
             <div class="ranking">
-              <div class="rank-row"><b>01</b><div><strong>Centro de Distribuição</strong><small>Av. Amazonas, 4.520</small></div><em>1h 42min</em></div>
-              <div class="rank-row"><b>02</b><div><strong>Cliente A — Savassi</strong><small>Rua Pernambuco, 1.200</small></div><em>58min</em></div>
-              <div class="rank-row"><b>03</b><div><strong>Laboratório Norte</strong><small>Av. Cristiano Machado, 820</small></div><em>44min</em></div>
-              <div class="rank-row"><b>04</b><div><strong>Mercado Central</strong><small>Av. Augusto de Lima, 744</small></div><em>31min</em></div>
+              <div class="rank-row"><b class="ponto-id">01</b><div><!--<strong class="ponto-endereco">Centro de Distribuição</strong>--><small class="ponto-endereco">Av. Amazonas, 4.520</small></div><em class="ponto-tempoParadoCalculado">1h 42min</em></div>
+              <div class="rank-row"><b>02</b><div><!--<strong>Cliente A — Savassi</strong>--><small>Rua Pernambuco, 1.200</small></div><em>58min</em></div>
+              <div class="rank-row"><b>03</b><div><!--<strong>Laboratório Norte</strong>--><small>Av. Cristiano Machado, 820</small></div><em>44min</em></div>
+              <div class="rank-row"><b>04</b><div><!--<strong>Mercado Central</strong>--><small>Av. Augusto de Lima, 744</small></div><em>31min</em></div>
             </div>
           </article>
         </div>
