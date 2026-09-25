@@ -1,4 +1,4 @@
-package dao;
+package com.example.dao;
 
 import java.sql.*;
 
@@ -11,12 +11,12 @@ public class DAO {
 	
 	public boolean conectar() {
 		String driverName = "org.postgresql.Driver";                    
-		String serverName = "loop.postgres.database.azure.com";
-		String mydatabase = "";
+		String serverName = "localhost";
+		String mydatabase = "[Nome do banco de dados]";
 		int porta = 5432;
-		String url = "jdbc:postgresql://" + serverName + ":" + porta +"/" + mydatabase + "?sslmode=require";
-		String username = "";
-		String password = "";
+		String url = "jdbc:postgresql://" + serverName + ":" + porta +"/" + mydatabase;
+		String username = "[Nome de usuário do banco de dados]";
+		String password = "[Senha do banco de dados]";
 		boolean status = false;
 
 		try {

@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,6 +15,9 @@ public class Ponto {
 
     public Ponto() {
     }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public String getEndereco() { return endereco; }    
     public void setEndereco(String endereco) { this.endereco = endereco; }
@@ -36,9 +39,4 @@ public class Ponto {
 
     public LocalTime getTempoParadoCalculado() { return tempoParadoCalculado; }
     public void setTempoParadoCalculado(LocalTime tempoParadoCalculado) { this.tempoParadoCalculado = tempoParadoCalculado; }
-
-    @Override
-    public String toString() {
-        return "Ponto [id=" + id + ", endereco=" + endereco + ", latitude=" + latitude + ", longitude=" + longitude + ", ordemNoRoteiro=" + ordemNoRoteiro + ", horarioChegada=" + horarioChegada + ", horarioSaida=" + horarioSaida + ", tempoParadoCalculado=" + tempoParadoCalculado + "]";
-    }
 }

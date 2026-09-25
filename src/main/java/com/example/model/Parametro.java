@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import java.time.LocalTime;
 
@@ -22,9 +22,4 @@ public class Parametro {
 
     public String getRegrasDeCalculo() { return regrasDeCalculo; }
     public void setRegrasDeCalculo(String regrasDeCalculo) { this.regrasDeCalculo = regrasDeCalculo; }
-    
-    @Override
-    public String toString() {
-        return "Parametro [valorCombustivel=" + valorCombustivel + ", custoPorKm=" + custoPorKm + ", jornadaPadraoHoras=" + jornadaPadraoHoras + ", regrasDeCalculo=" + regrasDeCalculo + "]";
-    }
 }

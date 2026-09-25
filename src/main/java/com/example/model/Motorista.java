@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 public class Motorista extends Pessoa{
     private String documento;
@@ -16,9 +16,4 @@ public class Motorista extends Pessoa{
 
     public int getRendimentoKmLitro() { return rendimentoKmLitro;}
     public void setRendimentoKmLitro(int rendimentoKmLitro) { this.rendimentoKmLitro = rendimentoKmLitro;}
-    
-    @Override
-    public String toString() {
-        return "Motorista [id=" + id + ", nome=" + nome + ", telefone=" + telefone + ", rendimentoKmLitro=" + rendimentoKmLitro + ", veiculo=" + veiculo + ", rendimentoKmLitro=" + rendimentoKmLitro + "]";
-    }
 }

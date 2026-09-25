@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,9 +27,4 @@ public class Roteiro {
 
     public float getCustoEstimado() { return custoEstimado; }
     public void setCustoEstimado(float custoEstimado) { this.custoEstimado = custoEstimado; }
-
-    @Override
-    public String toString() {
-        return "Roteiro [id=" + id + ", data=" + data + ", distanciaTotal=" + distanciaTotal + ", tempoTotalParado=" + tempoTotalParado + ", custoEstimado=" + custoEstimado + "]";
-    }
 }
