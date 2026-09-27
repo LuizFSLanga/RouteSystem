@@ -12,11 +12,11 @@ public class DAO {
 	public boolean conectar() {
 		String driverName = "org.postgresql.Driver";                    
 		String serverName = "localhost";
-		String mydatabase = "[Nome do banco de dados]";
+		String mydatabase = "RouteSystem";
 		int porta = 5432;
 		String url = "jdbc:postgresql://" + serverName + ":" + porta +"/" + mydatabase;
-		String username = "[Nome de usuário do banco de dados]";
-		String password = "[Senha do banco de dados]";
+		String username = "RouteSystem";
+		String password = "Rs@1234";
 		boolean status = false;
 
 		try {
@@ -36,7 +36,7 @@ public class DAO {
 	public boolean testarConexao() {
 		try {
             if (conexao != null && !conexao.isClosed() && conexao.isValid(5)) {
-                System.out.println("STATUS: Conexão com o PostgreSQL no Azure O.K.");
+                System.out.println("STATUS: Conexão com o PostgreSQL O.K.");
                 return true;
             } else {
                 System.err.println("STATUS: Conexão inativa ou não estabelecida.");
