@@ -8,6 +8,17 @@ public class Motorista extends Pessoa{
     public Motorista() {
     }
 
+    public Motorista(int id, String nome, String telefone, String documento, String veiculo, int rendimentoKmLitro) {
+
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.documento = documento;
+        this.documento = documento;
+        this.rendimentoKmLitro = rendimentoKmLitro;
+
+    }
+
     public String getDocumento() { return documento; }
     public void setDocumento(String documento) { this.documento = documento; }
 

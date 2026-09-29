@@ -23,7 +23,7 @@ public class App {
         staticFiles.externalLocation("src/main/webapp/"); 
         
         DAO dao = new DAO();
-        dao.conectar(); 
+        dao.conectar();
         
         boolean dbOk = dao.testarConexao(); 
         
@@ -41,7 +41,7 @@ public class App {
         });
 
         awaitInitialization();
-        System.out.println("Servidor Spark (Hemes Route) iniciado na porta 4567. Acesse http://localhost:4567");
+        System.out.println("Servidor Spark (Hermes Routes) iniciado na porta 4567. Acesse http://localhost:4567");
 
     }
     /* 

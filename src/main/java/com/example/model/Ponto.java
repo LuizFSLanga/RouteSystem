@@ -1,23 +1,42 @@
 package com.example.model;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+//import java.time.LocalDateTime;
+//import java.time.LocalTime;
+import java.sql.Timestamp;
 
 public class Ponto {
     private int id;
+    private int idRoteiro;
     private String endereco;
     private double latitude;
     private double longitude;
-    private Roteiro ordemNoRoteiro;
-    private LocalDateTime horarioChegada;
-    private LocalDateTime horarioSaida;
-    private LocalTime tempoParadoCalculado;
+    private Integer ordemNoRoteiro;
+    private Timestamp horarioChegada;
+    private Timestamp horarioSaida;
+    private int tempoParadoCalculado;
 
     public Ponto() {
     }
 
+    public Ponto( int id, int idRoteiro, String endereco, double latitude, double longitude, Integer ordemNoRoteiro, Timestamp horarioChegada, Timestamp horarioSaida, int tempoParadoCalculado) {
+
+        this.id = id;
+        this.idRoteiro = idRoteiro;
+        this.endereco = endereco;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.ordemNoRoteiro = ordemNoRoteiro;
+        this.horarioChegada = horarioChegada;
+        this.horarioSaida = horarioSaida;
+        this.tempoParadoCalculado = tempoParadoCalculado;
+
+    }
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
+
+    public int getIdRoteiro() { return idRoteiro; }
+    public void setIdRoteiro(int id) { this.id = idRoteiro; }
 
     public String getEndereco() { return endereco; }    
     public void setEndereco(String endereco) { this.endereco = endereco; }
@@ -28,15 +47,15 @@ public class Ponto {
     public double getLongitude() { return longitude; }
     public void setLongitude(double longitude) { this.longitude = longitude; }
 
-    public Roteiro getOrdemNoRoteiro() { return ordemNoRoteiro; }
-    public void setOrdemNoRoteiro(Roteiro ordemNoRoteiro) { this.ordemNoRoteiro = ordemNoRoteiro; }
+    public Integer getOrdemNoRoteiro() { return ordemNoRoteiro; }
+    public void setOrdemNoRoteiro(Integer ordemNoRoteiro) { this.ordemNoRoteiro = ordemNoRoteiro; }
 
-    public LocalDateTime getHorarioChegada() { return horarioChegada; }
-    public void setHorarioChegada(LocalDateTime horarioChegada) { this.horarioChegada = horarioChegada; }
+    public Timestamp getHorarioChegada() { return horarioChegada; }
+    public void setHorarioChegada(Timestamp horarioChegada) { this.horarioChegada = horarioChegada; }
 
-    public LocalDateTime getHorarioSaida() { return horarioSaida; }
-    public void setHorarioSaida(LocalDateTime horarioSaida) { this.horarioSaida = horarioSaida; }
+    public Timestamp getHorarioSaida() { return horarioSaida; }
+    public void setHorarioSaida(Timestamp horarioSaida) { this.horarioSaida = horarioSaida; }
 
-    public LocalTime getTempoParadoCalculado() { return tempoParadoCalculado; }
-    public void setTempoParadoCalculado(LocalTime tempoParadoCalculado) { this.tempoParadoCalculado = tempoParadoCalculado; }
+    public int getTempoParadoCalculado() { return tempoParadoCalculado; }
+    public void setTempoParadoCalculado(int tempoParadoCalculado) { this.tempoParadoCalculado = tempoParadoCalculado; }
 }

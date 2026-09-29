@@ -3,6 +3,7 @@ package com.example.dao;
 import java.sql.*;
 
 public class DAO {
+
 	protected Connection conexao;
 
 	public DAO() {
@@ -60,4 +61,5 @@ public class DAO {
 		}
 		return status;
 	}
+	
 }
