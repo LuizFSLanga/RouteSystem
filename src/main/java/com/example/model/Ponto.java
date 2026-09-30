@@ -1,7 +1,5 @@
 package com.example.model;
 
-//import java.time.LocalDateTime;
-//import java.time.LocalTime;
 import java.sql.Timestamp;
 
 public class Ponto {
@@ -36,7 +34,7 @@ public class Ponto {
     public void setId(int id) { this.id = id; }
 
     public int getIdRoteiro() { return idRoteiro; }
-    public void setIdRoteiro(int id) { this.id = idRoteiro; }
+    public void setIdRoteiro(int idRoteiro) { this.idRoteiro = idRoteiro; }
 
     public String getEndereco() { return endereco; }    
     public void setEndereco(String endereco) { this.endereco = endereco; }

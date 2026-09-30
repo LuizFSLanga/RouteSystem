@@ -10,15 +10,15 @@ public class MotoristaDAO extends DAO {
 
     public boolean insert(Motorista motorista) {
 
-        String sql = "INSERT INTO Motorista (nome, telefone, documento, veiculo, rendimento_km_litro) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO motorista (nome, telefone, documento, veiculo, rendimento_km_litro) VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pst.setString(1, motorista.getNome());
             pst.setString(2, motorista.getTelefone());
             pst.setString(3, motorista.getDocumento());
             pst.setString(4, motorista.getVeiculo());
-            pst.setInt(5, motorista.getRendimentoKmLitro());
+            pst.setDouble(5, motorista.getRendimentoKmLitro());
 
             if (pst.executeUpdate() > 0) {
                 try (ResultSet rs = pst.getGeneratedKeys()) {
@@ -41,9 +41,9 @@ public class MotoristaDAO extends DAO {
     public Motorista get(int idMotorista) {
 
         Motorista motorista = null;
-        String sql = "SELECT * FROM Motorista WHERE id = ?";
+        String sql = "SELECT * FROM motorista WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
             pst.setInt(1, idMotorista);
 
@@ -55,7 +55,7 @@ public class MotoristaDAO extends DAO {
                                               rs.getString("telefone"),
                                               rs.getString("documento"),
                                               rs.getString("veiculo"),
-                                              rs.getInt("rendimento_km_litro")
+                                              rs.getDouble("rendimento_km_litro")
                                              );
                 }
 
@@ -74,9 +74,9 @@ public class MotoristaDAO extends DAO {
 
         List<Motorista> listaMotorista = new ArrayList<>();
         
-        String sql = "SELECT * FROM Motorista ORDER BY id";
+        String sql = "SELECT * FROM motorista ORDER BY id";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql);
+        try (PreparedStatement pst = conexao().prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
@@ -85,7 +85,7 @@ public class MotoristaDAO extends DAO {
                                                         rs.getString("telefone"),
                                                         rs.getString("documento"),
                                                         rs.getString("veiculo"),
-                                                        rs.getInt("rendimento_km_litro")
+                                                        rs.getDouble("rendimento_km_litro")
                                                        );
                     listaMotorista.add(motorista);
             }
@@ -103,15 +103,15 @@ public class MotoristaDAO extends DAO {
 
     public boolean update(Motorista motorista) {
 
-        String sql = "UPDATE Motorista SET nome = ?, telefone = ?, documento = ?, veiculo = ?, rendimento_km_litro = ? WHERE id = ?";
+        String sql = "UPDATE motorista SET nome = ?, telefone = ?, documento = ?, veiculo = ?, rendimento_km_litro = ? WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setString(1, motorista.getNome());
             pst.setString(2, motorista.getTelefone());
             pst.setString(3, motorista.getDocumento());
             pst.setString(4, motorista.getVeiculo());
-            pst.setInt(5, motorista.getRendimentoKmLitro());
+            pst.setDouble(5, motorista.getRendimentoKmLitro());
             pst.setInt(6, motorista.getId());
 
             return pst.executeUpdate() > 0;
@@ -127,9 +127,9 @@ public class MotoristaDAO extends DAO {
 
     public boolean remove(int id) {
 
-        String sql = "DELETE FROM Motorista WHERE id = ?";
+        String sql = "DELETE FROM motorista WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, id);
 

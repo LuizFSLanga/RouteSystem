@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerente</title>
+  <title>Hermes - Gestão de Rotas</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-mark">RT</div>
+        <div class="brand-mark">H</div>
         <div>
           <strong>Hermes</strong>
           <small>Gestão de rotas</small>
@@ -22,15 +22,15 @@
         <button class="nav-item" data-page="rotas"><span>⌖</span> Rotas</button>
         <button class="nav-item" data-page="pontos"><span>●</span> Pontos</button>
         <button class="nav-item" data-page="motoristas"><span>♙</span> Motoristas</button>
+        <button class="nav-item" data-page="gerentes"><span>♔</span> Gerentes</button>
         <button class="nav-item" data-page="historico"><span>◷</span> Histórico</button>
         <button class="nav-item" data-page="configuracoes"><span>⚙</span> Configurações</button>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-avatar">LC</div>
+        <div class="user-avatar">GC</div>
         <div>
-          <strong class="user-name"></strong>
-          <!--<small>Administrador</small>-->
+          <strong class="user-name">Gerente / Coordenador</strong>
         </div>
       </div>
     </aside>
@@ -42,17 +42,15 @@
           <div class="breadcrumb">Operação / <strong id="pageName">Dashboard</strong></div>
           <h1 id="pageTitle">Visão geral</h1>
         </div>
-        <div class="top-actions">
-          <!--<div class="date-chip">21/09/2026</div>
-          <button class="icon-btn" title="Notificações">♢</button>-->
-        </div>
+        <div class="top-actions"></div>
       </header>
 
+      <!-- SEÇÃO DASHBOARD -->
       <section id="dashboard" class="page active">
         <div class="page-intro">
           <div>
             <p class="eyebrow">ACOMPANHAMENTO OPERACIONAL</p>
-            <h2 class="user-name"></h2>
+            <h2>Visão Geral da Operação</h2>
             <p class="muted">Veja quanto tempo sua operação está parando e onde estão os principais gargalos.</p>
           </div>
           <button class="primary" data-modal="modalRegistro">Registrar parada</button>
@@ -60,19 +58,15 @@
 
         <div class="kpi-grid">
           <article class="kpi-card">
-            <!--<div class="kpi-icon blue">◷</div>-->
             <div><span>Tempo parado hoje</span><strong>4h 18min</strong><small class="positive">↓ 12% vs. ontem</small></div>
           </article>
           <article class="kpi-card">
-            <!--<div class="kpi-icon orange">●</div>-->
             <div><span>Paradas registradas</span><strong>27</strong><small>8 motoristas</small></div>
           </article>
           <article class="kpi-card">
-            <!--<div class="kpi-icon green">⌁</div>-->
             <div><span>Distância percorrida</span><strong>486 km</strong><small>32 rotas concluídas</small></div>
           </article>
           <article class="kpi-card">
-            <!--<div class="kpi-icon purple">R$</div>-->
             <div><span>Custo estimado</span><strong class="custoEstimado">R$ 742,80</strong><small>R$ 1,53 / km</small></div>
           </article>
         </div>
@@ -85,6 +79,7 @@
                 <option>7 dias</option>
                 <option>30 dias</option>
                 <option>Este mês</option>
+                <option>12 meses</option>
               </select>
             </div>
             <div class="bar-chart" id="barChart"></div>
@@ -92,12 +87,15 @@
           </article>
 
           <article class="card">
-            <div class="card-head"><div><h3>Principais gargalos</h3><p>Locais com maior tempo parado</p></div><button class="link-btn" data-page-link="pontos">Ver todos</button></div>
+            <div class="card-head">
+              <div><h3>Principais gargalos</h3><p>Locais com maior tempo parado</p></div>
+              <button class="link-btn" data-page-link="pontos">Ver todos</button>
+            </div>
             <div class="ranking">
-              <div class="rank-row"><b class="ponto-id">01</b><div><!--<strong class="ponto-endereco">Centro de Distribuição</strong>--><small class="ponto-endereco">Av. Amazonas, 4.520</small></div><em class="ponto-tempoParadoCalculado">1h 42min</em></div>
-              <div class="rank-row"><b>02</b><div><!--<strong>Cliente A — Savassi</strong>--><small>Rua Pernambuco, 1.200</small></div><em>58min</em></div>
-              <div class="rank-row"><b>03</b><div><!--<strong>Laboratório Norte</strong>--><small>Av. Cristiano Machado, 820</small></div><em>44min</em></div>
-              <div class="rank-row"><b>04</b><div><!--<strong>Mercado Central</strong>--><small>Av. Augusto de Lima, 744</small></div><em>31min</em></div>
+              <div class="rank-row"><b class="ponto-id">01</b><div><small class="ponto-endereco">Av. Amazonas, 4.520</small></div><em class="ponto-tempoParadoCalculado">1h 42min</em></div>
+              <div class="rank-row"><b>02</b><div><small>Rua Pernambuco, 1.200</small></div><em>58min</em></div>
+              <div class="rank-row"><b>03</b><div><small>Av. Cristiano Machado, 820</small></div><em>44min</em></div>
+              <div class="rank-row"><b>04</b><div><small>Av. Augusto de Lima, 744</small></div><em>31min</em></div>
             </div>
           </article>
         </div>
@@ -108,55 +106,256 @@
             <button class="link-btn" data-page-link="rotas">Ver todas</button>
           </div>
           <div class="table-wrap">
-            <table><thead><tr><th>Motorista</th><th>Rota</th><th>Paradas</th><th>Tempo parado</th><th>Status</th></tr></thead>
-            <tbody id="dashboardRoutes"></tbody></table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Rota</th>
+                  <th>Motorista</th>
+                  <th>Data</th>
+                  <th>Pontos</th>
+                  <th>Distância</th>
+                  <th>Tempo parado</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardRoutes"></tbody>
+            </table>
           </div>
         </article>
       </section>
 
+      <!-- SEÇÃO ROTAS -->
       <section id="rotas" class="page">
-        <div class="page-intro"><div><p class="eyebrow">OPERAÇÃO</p><h2>Rotas</h2><p class="muted">Cadastre, acompanhe e consulte os roteiros diários.</p></div><button class="primary" data-modal="modalRota">+ Nova rota</button></div>
-        <div class="filter-row"><input id="routeSearch" class="search" placeholder="⌕  Buscar por motorista ou rota..."><select><option>Todos os status</option><option>Em andamento</option><option>Concluída</option><option>Pendente</option></select><input type="date" value="2026-09-21"></div>
-        <article class="card table-card"><div class="table-wrap"><table><thead><tr><th>Rota</th><th>Motorista</th><th>Data</th><th>Pontos</th><th>Distância</th><th>Tempo parado</th><th>Status</th><th></th></tr></thead><tbody id="routesTable"></tbody></table></div></article>
+        <div class="page-intro">
+          <div><p class="eyebrow">OPERAÇÃO</p><h2>Rotas</h2><p class="muted">Cadastre, acompanhe e consulte os roteiros diários.</p></div>
+          <button class="primary" data-modal="modalRota">+ Nova rota</button>
+        </div>
+        <div class="filter-row">
+          <input id="routeSearch" class="search" placeholder="⌕  Buscar por motorista ou rota...">
+          <select>
+            <option>Todos os status</option>
+            <option>Em andamento</option>
+            <option>Concluída</option>
+            <option>Pendente</option>
+          </select>
+          <input type="date">
+        </div>
+        <article class="card table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rota</th>
+                  <th>Motorista</th>
+                  <th>Data</th>
+                  <th>Pontos</th>
+                  <th>Distância</th>
+                  <th>Tempo parado</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="routesTable"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
+      <!-- SEÇÃO PONTOS -->
       <section id="pontos" class="page">
-        <div class="page-intro"><div><p class="eyebrow">CADASTRO</p><h2>Pontos de parada</h2><p class="muted">Locais atendidos e histórico de permanência.</p></div><button class="primary" data-modal="modalPonto">+ Novo ponto</button></div>
-        <div class="summary-strip"><div><strong>38</strong><span>pontos cadastrados</span></div><div><strong>12</strong><span>clientes ativos</span></div><div><strong>2h 16min</strong><span>maior parada hoje</span></div></div>
-        <article class="card table-card"><div class="filter-row compact"><input id="pointSearch" class="search" placeholder="⌕  Buscar endereço ou ponto..."><select><option>Todos os tipos</option><option>Cliente</option><option>Depósito</option><option>Coleta</option></select></div><div class="table-wrap"><table><thead><tr><th>Ponto</th><th>Endereço</th><th>Chegada</th><th>Saída</th><th>Tempo parado</th><th>Tipo</th></tr></thead><tbody id="pointsTable"></tbody></table></div></article>
+        <div class="page-intro">
+          <div><p class="eyebrow">CADASTRO</p><h2>Pontos de parada</h2><p class="muted">Locais atendidos e histórico de permanência.</p></div>
+          <button class="primary" data-modal="modalPonto">+ Novo ponto</button>
+        </div>
+        <div class="summary-strip">
+          <div><strong>38</strong><span>pontos cadastrados</span></div>
+          <div><strong>12</strong><span>clientes ativos</span></div>
+          <div><strong>2h 16min</strong><span>maior parada hoje</span></div>
+        </div>
+        <article class="card table-card">
+          <div class="filter-row compact">
+            <input id="pointSearch" class="search" placeholder="⌕  Buscar endereço ou ponto...">
+            <select id="pointType">
+              <option value="">Todos os tipos</option>
+              <option value="Partida">Partida</option>
+              <option value="Parada">Parada</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ponto</th>
+                  <th>Endereço</th>
+                  <th>Chegada</th>
+                  <th>Saída</th>
+                  <th>Tempo parado</th>
+                  <th>Tipo</th>
+                </tr>
+              </thead>
+              <tbody id="pointsTable"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
+      <!-- SEÇÃO MOTORISTAS -->
       <section id="motoristas" class="page">
-        <div class="page-intro"><div><p class="eyebrow">EQUIPE</p><h2>Motoristas e entregadores</h2><p class="muted">Acompanhe jornada, produtividade e paradas por profissional.</p></div><button class="primary" data-modal="modalMotorista">+ Novo motorista</button></div>
+        <div class="page-intro">
+          <div><p class="eyebrow">EQUIPE</p><h2>Motoristas e entregadores</h2><p class="muted">Acompanhe jornada, produtividade e paradas por profissional.</p></div>
+          <button class="primary" data-modal="modalMotorista">+ Novo motorista</button>
+        </div>
         <div class="driver-grid" id="driverGrid"></div>
       </section>
 
-      <section id="historico" class="page">
-        <div class="page-intro"><div><p class="eyebrow">ANÁLISE</p><h2>Histórico de paradas</h2><p class="muted">Consulte o tempo parado por dia, mês, período e endereço.</p></div><button class="secondary" id="exportBtn">⇩ Exportar CSV</button></div>
-        <div class="filter-row"><input type="date" value="2026-09-01"><span class="arrow">até</span><input type="date" value="2026-09-21"><select><option>Todos os motoristas</option><option>João Silva</option><option>Marcos Lima</option><option>Rafael Souza</option></select><select><option>Todos os períodos</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></div>
-        <div class="dashboard-grid">
-        <!--Adicionar filtro-->
-          <article class="card chart-card"><div class="card-head"><div><h3>Tempo parado por período</h3><p>Distribuição no intervalo selecionado</p></div></div><div class="donut-wrap"><div class="donut"><div><strong>68h</strong><span>total</span></div></div><div class="donut-legend"><span><i class="dot morning"></i> Manhã <b>32%</b></span><span><i class="dot afternoon"></i> Tarde <b>51%</b></span><span><i class="dot night"></i> Noite <b>17%</b></span></div></div></article>
-          <article class="card chart-card"><div class="card-head"><div><h3>Custo da operação</h3><p>Estimativa baseada em km e consumo</p></div></div><div class="cost-box"><div><span>Custo por km</span><strong>R$ 1,53</strong></div><div><span>Consumo médio</span><strong>9,8 km/L</strong></div><div><span>Combustível</span><strong>R$ 512,40</strong></div><div><span>Tempo parado</span><strong>R$ 230,40</strong></div></div></article>
+      <!-- SEÇÃO GERENTES -->
+      <section id="gerentes" class="page">
+        <div class="page-intro">
+          <div><p class="eyebrow">EQUIPE</p><h2>Gerentes e coordenadores</h2><p class="muted">Responsáveis pelas equipes de campo.</p></div>
+          <button class="primary" data-modal="modalGerente">+ Novo gerente</button>
         </div>
-        <article class="card table-card"><div class="card-head"><div><h3>Registros detalhados</h3><p>Chegada, saída e duração em cada ponto</p></div></div><div class="table-wrap"><table><thead><tr><th>Data</th><th>Motorista</th><th>Ponto</th><th>Chegada</th><th>Saída</th><th>Duração</th></tr></thead><tbody id="historyTable"></tbody></table></div></article>
+        <article class="card table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Equipe sob responsabilidade</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="managersTable"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
+      <!-- SEÇÃO HISTÓRICO -->
+      <section id="historico" class="page">
+        <div class="page-intro">
+          <div><p class="eyebrow">ANÁLISE</p><h2>Histórico de paradas</h2><p class="muted">Consulte o tempo parado por dia, mês, período e endereço.</p></div>
+          <button class="secondary" id="exportBtn">⇩ Exportar CSV</button>
+        </div>
+        <div class="filter-row">
+          <input type="date">
+          <span class="arrow">até</span>
+          <input type="date">
+          <select id="histMotorista"><option value="">Todos os motoristas</option></select>
+          <select id="histTurno"><option value="">Todos os períodos</option><option value="manha">Manhã</option><option value="tarde">Tarde</option><option value="noite">Noite</option></select>
+        </div>
+        <div class="dashboard-grid">
+          <article class="card chart-card">
+            <div class="card-head"><div><h3>Tempo parado por período</h3><p>Distribuição no intervalo selecionado</p></div></div>
+            <div class="donut-wrap">
+              <div class="donut"><div><strong>68h</strong><span>total</span></div></div>
+              <div class="donut-legend">
+                <span><i class="dot morning"></i> Manhã <b>32%</b></span>
+                <span><i class="dot afternoon"></i> Tarde <b>51%</b></span>
+                <span><i class="dot night"></i> Noite <b>17%</b></span>
+              </div>
+            </div>
+          </article>
+          <article class="card chart-card">
+            <div class="card-head"><div><h3>Custo da operação</h3><p>Estimativa baseada em km e consumo</p></div></div>
+            <div class="cost-box">
+              <div><span>Custo por km</span><strong>R$ 1,53</strong></div>
+              <div><span>Consumo médio</span><strong>9,8 km/L</strong></div>
+              <div><span>Combustível</span><strong>R$ 512,40</strong></div>
+              <div><span>Tempo parado</span><strong>R$ 230,40</strong></div>
+            </div>
+          </article>
+        </div>
+        <article class="card table-card">
+          <div class="card-head"><div><h3>Registros detalhados</h3><p>Chegada, saída e duração em cada ponto</p></div></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Data</th><th>Motorista</th><th>Ponto</th><th>Chegada</th><th>Saída</th><th>Duração</th></tr>
+              </thead>
+              <tbody id="historyTable"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- SEÇÃO CONFIGURAÇÕES -->
       <section id="configuracoes" class="page">
-        <div class="page-intro"><div><p class="eyebrow">SISTEMA</p><h2>Configurações</h2><p class="muted">Parâmetros usados nos cálculos e na jornada padrão.</p></div><button class="primary" id="saveConfig">Salvar alterações</button></div>
+        <div class="page-intro">
+          <div><p class="eyebrow">SISTEMA</p><h2>Configurações</h2><p class="muted">Parâmetros usados nos cálculos e na jornada padrão.</p></div>
+          <button class="primary" id="saveConfig">Salvar alterações</button>
+        </div>
         <div class="settings-grid">
-          <article class="card form-card"><h3>Custos da operação</h3><p class="muted">Defina os valores utilizados nos indicadores.</p><label>Preço do combustível (R$/L)<input type="number" value="6.29" step=".01"></label><label>Custo estimado da hora parada (R$)<input type="number" value="53.50" step=".01"></label><label>Consumo padrão (km/L)<input type="number" value="9.8" step=".1"></label></article>
-          <article class="card form-card"><h3>Jornada padrão</h3><p class="muted">Horários de referência para análise dos roteiros.</p><label>Início da jornada<input type="time" value="08:00"></label><label>Fim da jornada<input type="time" value="18:00"></label><label>Intervalo<input type="number" value="60" min="0"><small>minutos</small></label></article>
+          <article class="card form-card">
+            <h3>Custos da operação</h3>
+            <p class="muted">Defina os valores utilizados nos indicadores.</p>
+            <label>Preço do combustível (R$/L)<input id="cfgCombustivel" type="number" value="6.29" step=".01" min="0"></label>
+            <label>Custo por Km (R$/km)<input id="cfgCustoKm" type="number" value="1.53" step=".01" min="0"></label>
+            <label>Consumo padrão (km/L)<input id="cfgKmLitro" type="number" value="9.8" step=".1" min="0.1"></label>
+          </article>
+          <article class="card form-card">
+            <h3>Jornada e regras de cálculo</h3>
+            <p class="muted">Base percentual dos indicadores de tempo parado e regra aplicada.</p>
+            <label>Jornada padrão (horas por dia)<input id="cfgJornada" type="number" value="8" step=".5" min="1" max="24"></label>
+            <label>Regras de cálculo do tempo parado<textarea id="cfgRegras" rows="4">Tempo parado = saída - chegada; ponto de partida não conta.</textarea></label>
+          </article>
         </div>
       </section>
     </main>
   </div>
 
+  <!-- MODAIS DE CADASTRO -->
   <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" id="modalRegistro"><button class="close">×</button><h3>Registrar parada</h3><p class="muted">Associe a chegada e saída a um ponto do roteiro.</p><form class="modal-form"><label>Motorista<select><option>João Silva</option><option>Marcos Lima</option><option>Rafael Souza</option></select></label><label>Ponto<input placeholder="Ex.: Cliente A — Savassi"></label><div class="two"><label>Chegada<input type="datetime-local" value="2026-09-21T14:20"></label><label>Saída<input type="datetime-local" value="2026-09-21T15:05"></label></div><button class="primary" type="submit">Registrar</button></form></div>
-    <div class="modal" id="modalRota"><button class="close">×</button><h3>Nova rota</h3><form class="modal-form"><label>Nome da rota<input placeholder="Ex.: Rota Centro — Tarde"></label><label>Motorista<select><option>João Silva</option><option>Marcos Lima</option><option>Rafael Souza</option></select></label><label>Data<input type="date" value="2026-09-21"></label><label>Distância estimada (km)<input type="number" placeholder="120"></label><button class="primary" type="submit">Criar rota</button></form></div>
-    <div class="modal" id="modalPonto"><button class="close">×</button><h3>Novo ponto</h3><form class="modal-form"><label>Nome do ponto<input placeholder="Ex.: Cliente B"></label><label>Endereço<input placeholder="Rua, número, bairro"></label><label>Tipo<select><option>Cliente</option><option>Depósito</option><option>Coleta</option></select></label><button class="primary" type="submit">Cadastrar ponto</button></form></div>
-    <div class="modal" id="modalMotorista"><button class="close">×</button><h3>Novo motorista</h3><form class="modal-form"><label>Nome completo<input placeholder="Nome do profissional"></label><label>Telefone<input placeholder="(31) 99999-9999"></label><label>Veículo<input placeholder="Modelo / placa"></label><button class="primary" type="submit">Cadastrar</button></form></div>
+    <div class="modal" id="modalRegistro">
+      <button class="close">×</button>
+      <h3>Registrar parada</h3>
+      <p class="muted">Associe a chegada e saída a um ponto do roteiro.</p>
+      <form class="modal-form">
+        <label>Motorista<select></select></label>
+        <label>Ponto<input placeholder="Ex.: Cliente A — Savassi"></label>
+        <div class="two">
+          <label>Chegada<input type="datetime-local" value="2026-09-21T14:20"></label>
+          <label>Saída<input type="datetime-local" value="2026-09-21T15:05"></label>
+        </div>
+        <button class="primary" type="submit">Registrar</button>
+      </form>
+    </div>
+
+    <div class="modal" id="modalRota">
+      <button class="close">×</button>
+      <h3>Nova rota</h3>
+      <form class="modal-form">
+        <label>Motorista<select></select></label>
+        <button class="primary" type="submit">Criar rota</button>
+      </form>
+    </div>
+
+    <div class="modal" id="modalPonto">
+      <button class="close">×</button>
+      <h3>Novo ponto</h3>
+      <form class="modal-form">
+        <label>Nome do ponto<input placeholder="Ex.: Cliente B"></label>
+        <label>Endereço<input placeholder="Rua, número, bairro"></label>
+        <label>Tipo<select><option>Cliente</option><option>Depósito</option><option>Coleta</option></select></label>
+        <button class="primary" type="submit">Cadastrar ponto</button>
+      </form>
+    </div>
+
+    <div class="modal" id="modalGerente">
+      <button class="close">×</button>
+      <h3>Novo gerente / coordenador</h3>
+      <form class="modal-form"></form>
+    </div>
+
+    <div class="modal" id="modalMotorista">
+      <button class="close">×</button>
+      <h3>Novo motorista</h3>
+      <form class="modal-form">
+        <label>Nome completo
+          <input type="text" placeholder="Ex.: João Silva" required>
+        </label>
+        <label>Documento (CNH / CPF)
+          <input type="text" placeholder="Ex.: 12345678900" required>
+        </label>
+        <button class="primary" type="submit">Cadastrar</button>
+      </form>
+    </div>
   </div>
 
   <div class="toast" id="toast">Alterações salvas com sucesso.</div>

@@ -10,14 +10,13 @@ public class GerenteDAO extends DAO {
     
 	public GerenteDAO() {
 		super();
-		conectar();
 	}
 
 	public boolean insert(Gerente gerente) {
 
         String sql = "INSERT INTO Gerente (nome, telefone, email, equipe_sob_responsabilidade) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pst.setString(1, gerente.getNome());
             pst.setString(2, gerente.getTelefone());
@@ -45,7 +44,7 @@ public class GerenteDAO extends DAO {
         Gerente gerente = null;
         String sql = "SELECT * FROM Gerente WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
             pst.setInt(1, idGerente);
 
@@ -76,7 +75,7 @@ public class GerenteDAO extends DAO {
         
         String sql = "SELECT * FROM Gerente ORDER BY id";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql);
+        try (PreparedStatement pst = conexao().prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
@@ -103,7 +102,7 @@ public class GerenteDAO extends DAO {
 
         String sql = "UPDATE Gerente SET nome = ?, telefone = ?, email = ?, equipe_sob_responsabilidade = ? WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setString(1, gerente.getNome());
             pst.setString(2, gerente.getTelefone());
@@ -125,7 +124,7 @@ public class GerenteDAO extends DAO {
 
         String sql = "DELETE FROM Gerente WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, id);
 

@@ -15,7 +15,7 @@ public class PontoDAO extends DAO {
 
         String sql = "INSERT INTO Ponto (roteiro_id, endereco, latitude, longitude, ordem_no_roteiro, data_hora_chegada, data_hora_saida, tempo_parado_calculado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pst.setInt(1, ponto.getIdRoteiro());
             pst.setString(2, ponto.getEndereco());
@@ -29,7 +29,7 @@ public class PontoDAO extends DAO {
             if (pst.executeUpdate() > 0) {
                 try (ResultSet rs = pst.getGeneratedKeys()) {
                     if (rs.next()) {
-                        rs.getInt(1);
+                        ponto.setId(rs.getInt(1));
                     }
                 }
                 return true;
@@ -49,7 +49,7 @@ public class PontoDAO extends DAO {
         Ponto ponto = null;
         String sql = "SELECT * FROM Ponto WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
             pst.setInt(1, idPonto);
 
@@ -85,7 +85,7 @@ public class PontoDAO extends DAO {
         
         String sql = "SELECT * FROM Ponto ORDER BY id";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql);
+        try (PreparedStatement pst = conexao().prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
@@ -119,7 +119,7 @@ public class PontoDAO extends DAO {
 
         String sql = "SELECT * FROM Ponto WHERE roteiro_id = ? ORDER BY ordem_no_roteiro ASC";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, idRoteiro);
 
@@ -154,7 +154,7 @@ public class PontoDAO extends DAO {
 
         String sql = "UPDATE Ponto SET roteiro_id = ?, endereco = ?, latitude = ?, longitude = ?, ordem_no_roteiro = ?, data_hora_chegada = ?, data_hora_saida = ?, tempo_parado_calculado = ? WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
 
             pst.setInt(1, ponto.getIdRoteiro());
@@ -182,7 +182,7 @@ public class PontoDAO extends DAO {
 
         String sql = "DELETE FROM Ponto WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, id);
 

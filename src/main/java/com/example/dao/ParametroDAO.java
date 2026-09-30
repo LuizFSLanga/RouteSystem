@@ -12,7 +12,7 @@ public class ParametroDAO extends DAO {
 
         String sql = "INSERT INTO Parametro (valor_combustivel, km_litro_veiculo, custo_por_km, jornada_padrao, regras_calculo_tempo_parado) VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pst.setDouble(1, parametro.getValorCombustivel());
             pst.setDouble(2, parametro.getKmLitro());
@@ -43,7 +43,7 @@ public class ParametroDAO extends DAO {
         Parametro parametro = null;
         String sql = "SELECT * FROM Parametro WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
             pst.setInt(1, idParametro);
 
@@ -76,7 +76,7 @@ public class ParametroDAO extends DAO {
         
         String sql = "SELECT * FROM Parametro ORDER BY id";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql);
+        try (PreparedStatement pst = conexao().prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
@@ -105,7 +105,7 @@ public class ParametroDAO extends DAO {
 
         String sql = "UPDATE Parametro SET valor_combustivel = ?, km_litro_veiculo = ?, custo_por_km = ?, jornada_padrao = ?, regras_calculo_tempo_parado = ? WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setDouble(1, parametro.getValorCombustivel());
             pst.setDouble(2, parametro.getKmLitro());
@@ -129,7 +129,7 @@ public class ParametroDAO extends DAO {
 
         String sql = "DELETE FROM Parametro WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, id);
 

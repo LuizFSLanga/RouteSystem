@@ -8,17 +8,20 @@ import com.example.model.Roteiro;
 
 public class RoteiroDAO extends DAO {
 
+    private static double nz(Double d) { return d == null ? 0.0 : d; }
+    private static int nz(Integer i) { return i == null ? 0 : i; }
+
     public boolean insert(Roteiro roteiro) {
 
         String sql = "INSERT INTO Roteiro (data, motorista_id, distancia_total, tempo_total_parado, custo_estimado) VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pst.setDate(1, roteiro.getData());
-            pst.setInt(2, roteiro.getMotorista());
-            pst.setDouble(3, roteiro.getDistanciaTotal());
-            pst.setTimestamp(4, roteiro.getTempoTotalParado());
-            pst.setDouble(5, roteiro.getCustoEstimado());
+            pst.setInt(2, roteiro.getIdMotorista());
+            pst.setDouble(3, nz(roteiro.getDistanciaTotal()));
+            pst.setInt(4, nz(roteiro.getTempoTotalParado()));
+            pst.setDouble(5, nz(roteiro.getCustoEstimado()));
 
             if (pst.executeUpdate() > 0) {
                 try (ResultSet rs = pst.getGeneratedKeys()) {
@@ -43,7 +46,7 @@ public class RoteiroDAO extends DAO {
         Roteiro roteiro = null;
         String sql = "SELECT * FROM Roteiro WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
             
             pst.setInt(1, idRoteiro);
 
@@ -54,7 +57,7 @@ public class RoteiroDAO extends DAO {
                                           rs.getDate("data"),
                                           rs.getInt("motorista_id"),
                                           rs.getDouble("distancia_total"),
-                                          rs.getTimestamp("tempo_total_parado"),
+                                          rs.getInt("tempo_total_parado"),
                                           rs.getDouble("custo_estimado")
                                          );
                 }
@@ -76,7 +79,7 @@ public class RoteiroDAO extends DAO {
         
         String sql = "SELECT * FROM Roteiro ORDER BY id";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql);
+        try (PreparedStatement pst = conexao().prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
@@ -84,7 +87,7 @@ public class RoteiroDAO extends DAO {
                                                   rs.getDate("data"),
                                                   rs.getInt("motorista_id"),
                                                   rs.getDouble("distancia_total"),
-                                                  rs.getTimestamp("tempo_total_parado"),
+                                                  rs.getInt("tempo_total_parado"),
                                                   rs.getDouble("custo_estimado")
                                                  );
                     listaRoteiro.add(roteiro);
@@ -107,7 +110,7 @@ public class RoteiroDAO extends DAO {
 
         String sql = "SELECT * FROM Roteiro WHERE motorista_id = ? ORDER BY id DESC";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, idMotorista);
 
@@ -118,7 +121,7 @@ public class RoteiroDAO extends DAO {
                                                   rs.getDate("data"),
                                                   rs.getInt("motorista_id"),
                                                   rs.getDouble("distancia_total"),
-                                                  rs.getTimestamp("tempo_total_parado"),
+                                                  rs.getInt("tempo_total_parado"),
                                                   rs.getDouble("custo_estimado")
                                                  );
                     listaRoteiros.add(roteiro);
@@ -127,7 +130,7 @@ public class RoteiroDAO extends DAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Erro ao listar produtos por vendedor: " + e.getMessage());
+            System.err.println("Erro ao listar roteiros por motorista: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -139,19 +142,19 @@ public class RoteiroDAO extends DAO {
 
         String sql = "UPDATE Roteiro SET data = ?, motorista_id = ?, distancia_total = ?, tempo_total_parado = ?, custo_estimado = ? WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setDate(1, roteiro.getData());
-            pst.setInt(2, roteiro.getMotorista());
-            pst.setDouble(3, roteiro.getDistanciaTotal());
-            pst.setTimestamp(4, roteiro.getTempoTotalParado());
-            pst.setDouble(5, roteiro.getCustoEstimado());
+            pst.setInt(2, roteiro.getIdMotorista());
+            pst.setDouble(3, nz(roteiro.getDistanciaTotal()));
+            pst.setInt(4, nz(roteiro.getTempoTotalParado()));
+            pst.setDouble(5, nz(roteiro.getCustoEstimado()));
             pst.setInt(6, roteiro.getId());
 
             return pst.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.err.println("ERRO ao atualizar poteiro: " + e.getMessage());
+            System.err.println("ERRO ao atualizar roteiro: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -163,7 +166,7 @@ public class RoteiroDAO extends DAO {
 
         String sql = "DELETE FROM Roteiro WHERE id = ?";
 
-        try (PreparedStatement pst = conexao.prepareStatement(sql)) {
+        try (PreparedStatement pst = conexao().prepareStatement(sql)) {
 
             pst.setInt(1, id);
 
